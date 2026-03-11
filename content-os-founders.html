@@ -1,0 +1,3319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content OS for Founders — Uniflex Digitals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0D0D;
+  --cream: #F5F0E8;
+  --warm: #E8DDD0;
+  --gold: #C8A96E;
+  --gold-light: #E8CFA0;
+  --rust: #B85C38;
+  --sage: #4A6741;
+  --steel: #3A4A5C;
+  --mist: #8A9BAB;
+  --paper: #FAF7F2;
+  --accent1: #D4704A;
+  --accent2: #4A7A6A;
+  --accent3: #7A5C8A;
+  --border: rgba(200,169,110,0.25);
+  --shadow: 0 4px 24px rgba(13,13,13,0.08);
+  --shadow-lg: 0 12px 48px rgba(13,13,13,0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── LAYOUT ─── */
+.app { display: flex; min-height: 100vh; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: 280px;
+  background: var(--ink);
+  color: var(--cream);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.brand-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(200,169,110,0.12);
+  border: 1px solid rgba(200,169,110,0.3);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cream);
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--mist);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-nav { padding: 16px 0; flex: 1; }
+
+.nav-section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+  padding: 16px 24px 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.65);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--cream);
+}
+
+.nav-item.active {
+  border-left-color: var(--gold);
+  background: rgba(200,169,110,0.08);
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 11px;
+  color: var(--mist);
+}
+
+.sidebar-footer strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 12px; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: 280px;
+  flex: 1;
+  min-height: 100vh;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* ─── TOP HEADER ─── */
+.page-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 48px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.page-header-left {}
+.page-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.page-desc {
+  font-size: 13.5px;
+  color: #666;
+  margin-top: 6px;
+  max-width: 600px;
+}
+
+.header-actions { display: flex; gap: 10px; align-items: center; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--cream);
+}
+.btn-primary:hover { background: #333; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--warm); }
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+.btn-gold:hover { background: var(--gold-light); }
+
+/* ─── CONTENT AREA ─── */
+.content { padding: 40px 48px; }
+
+/* ─── WELCOME PAGE ─── */
+.welcome-hero {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 12px;
+  padding: 56px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(200,169,110,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.welcome-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 200px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(184,92,56,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.1;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.hero-headline em { color: var(--gold); font-style: italic; }
+
+.hero-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.75);
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.hero-stat {}
+.hero-stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--mist);
+  letter-spacing: 0.05em;
+}
+
+/* ─── CARDS ─── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.card-icon.gold { background: rgba(200,169,110,0.12); }
+.card-icon.rust { background: rgba(184,92,56,0.1); }
+.card-icon.sage { background: rgba(74,103,65,0.1); }
+.card-icon.steel { background: rgba(58,74,92,0.1); }
+.card-icon.purple { background: rgba(122,92,138,0.1); }
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-body { font-size: 13.5px; color: #666; line-height: 1.6; }
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+/* ─── SECTIONS ─── */
+.section { margin-bottom: 48px; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.section-action {
+  font-size: 12px;
+  color: var(--gold);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ─── PHASE TIMELINE ─── */
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+
+.phase-grid::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), var(--rust), var(--sage));
+  z-index: 0;
+}
+
+.phase-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  z-index: 1;
+  margin: 0 8px;
+  transition: all 0.2s;
+}
+.phase-card:hover { box-shadow: var(--shadow); }
+
+.phase-number {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.phase-1 .phase-number { background: var(--gold); color: var(--ink); }
+.phase-2 .phase-number { background: var(--rust); color: white; }
+.phase-3 .phase-number { background: var(--sage); color: white; }
+
+.phase-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 6px;
+}
+
+.phase-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.phase-weeks {
+  display: inline-block;
+  background: var(--warm);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.phase-tasks { list-style: none; }
+.phase-tasks li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: #555;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  line-height: 1.4;
+}
+
+.phase-tasks li::before {
+  content: '→';
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+/* ─── WEEK TABLE ─── */
+.week-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.week-table th {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.week-table th:first-child { border-radius: 6px 0 0 0; }
+.week-table th:last-child { border-radius: 0 6px 0 0; }
+.week-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.week-table tr:nth-child(even) td { background: rgba(245,240,232,0.4); }
+.week-table tr:hover td { background: rgba(200,169,110,0.05); }
+
+.week-badge {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--gold);
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.milestone-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.milestone-tag.setup { background: rgba(200,169,110,0.15); color: #8A6A30; }
+.milestone-tag.grow { background: rgba(184,92,56,0.12); color: #B85C38; }
+.milestone-tag.scale { background: rgba(74,103,65,0.12); color: #4A6741; }
+
+/* ─── HOOK BANK ─── */
+.hook-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: white;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+.hooks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.hook-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.hook-card:hover { box-shadow: var(--shadow); border-color: var(--gold); }
+
+.hook-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hook-type-badge.curiosity { background: rgba(122,92,138,0.12); color: var(--accent3); }
+.hook-type-badge.pain { background: rgba(184,92,56,0.12); color: var(--rust); }
+.hook-type-badge.controversy { background: rgba(13,13,13,0.08); color: var(--ink); }
+.hook-type-badge.story { background: rgba(200,169,110,0.15); color: #8A6A30; }
+.hook-type-badge.result { background: rgba(74,103,65,0.12); color: var(--sage); }
+.hook-type-badge.question { background: rgba(58,74,92,0.1); color: var(--steel); }
+
+.hook-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.hook-formula {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--mist);
+  background: var(--warm);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.hook-why {
+  font-size: 12.5px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.hook-copy-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 28px; height: 28px;
+  border-radius: 4px;
+  background: var(--warm);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.hook-card:hover .hook-copy-btn { opacity: 1; }
+
+/* ─── STORYTELLING FRAMEWORKS ─── */
+.framework-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.framework-tab {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  color: #888;
+}
+
+.framework-tab:hover { color: var(--ink); }
+.framework-tab.active { border-bottom-color: var(--gold); color: var(--ink); font-weight: 600; }
+
+.framework-content { display: none; }
+.framework-content.active { display: block; }
+
+.framework-hero {
+  background: linear-gradient(135deg, var(--ink) 0%, #2A2A2A 100%);
+  border-radius: 10px;
+  padding: 36px;
+  margin-bottom: 24px;
+  color: var(--cream);
+}
+
+.framework-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.framework-tagline {
+  font-size: 14px;
+  color: rgba(245,240,232,0.7);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.framework-meta {
+  display: flex;
+  gap: 20px;
+}
+
+.framework-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.framework-meta-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.framework-meta-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.steps-list { display: flex; flex-direction: column; gap: 12px; }
+
+.step-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  transition: all 0.2s;
+}
+
+.step-item:hover { border-color: var(--gold); }
+
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-content {}
+.step-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: #666; line-height: 1.6; }
+
+.example-box {
+  background: var(--warm);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+
+.example-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.example-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* ─── TEMPLATES ─── */
+.platform-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.platform-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.platform-btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.platform-btn:hover:not(.active) { border-color: var(--gold); }
+
+.platform-content { display: none; }
+.platform-content.active { display: block; }
+
+.template-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.template-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.template-card:hover { box-shadow: var(--shadow); }
+
+.template-header {
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.template-name {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.template-format {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--mist);
+  background: var(--warm);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.template-body {
+  padding: 18px;
+}
+
+.template-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.06);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.template-line:last-child { border-bottom: none; }
+
+.template-line-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--mist);
+  min-width: 20px;
+  padding-top: 2px;
+}
+
+.placeholder {
+  background: rgba(200,169,110,0.18);
+  color: #8A6A30;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ─── ANALYTICS ─── */
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+
+.metric-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.metric-change {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.metric-change.up { color: var(--sage); }
+.metric-change.down { color: var(--rust); }
+
+.chart-container {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.chart-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 140px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.bar-pair {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 110px;
+}
+
+.bar {
+  border-radius: 3px 3px 0 0;
+  width: 16px;
+  transition: opacity 0.2s;
+}
+
+.bar:hover { opacity: 0.8; }
+
+.bar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--mist);
+  letter-spacing: 0.05em;
+}
+
+.top-posts-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.top-posts-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border);
+}
+.top-posts-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.top-posts-table tr:hover td { background: rgba(245,240,232,0.5); }
+
+.post-title-cell {
+  font-weight: 500;
+  max-width: 300px;
+}
+.post-excerpt {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.rank-badge {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank-2 { background: var(--warm); color: var(--ink); }
+.rank-3 { background: rgba(184,92,56,0.15); color: var(--rust); }
+
+.platform-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.platform-pill.li { background: rgba(10,102,194,0.1); color: #0a66c2; }
+.platform-pill.tw { background: rgba(29,161,242,0.1); color: #1da1f2; }
+.platform-pill.ig { background: rgba(193,53,132,0.1); color: #c13584; }
+.platform-pill.yt { background: rgba(255,0,0,0.08); color: #ff0000; }
+
+.goal-tracker {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.goal-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.goal-name { font-size: 13px; font-weight: 500; }
+.goal-status { font-size: 12px; color: var(--sage); font-weight: 500; }
+
+.goal-progress {
+  background: var(--warm);
+  border-radius: 4px;
+  height: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.goal-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--gold), var(--rust));
+}
+
+.goal-numbers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #888;
+}
+
+/* ─── CONTENT CALENDAR ─── */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cal-month {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.cal-controls { display: flex; gap: 8px; }
+.cal-btn {
+  width: 32px; height: 32px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-btn:hover { background: var(--warm); }
+
+.calendar-grid {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cal-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--ink);
+}
+
+.cal-day-header {
+  padding: 12px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.cal-day {
+  min-height: 100px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  position: relative;
+}
+
+.cal-day:nth-child(7n) { border-right: none; }
+
+.cal-day-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.cal-day.today .cal-day-num {
+  background: var(--gold);
+  color: var(--ink);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-day.other-month { background: rgba(245,240,232,0.4); }
+.cal-day.other-month .cal-day-num { color: #ccc; }
+
+.cal-event {
+  background: rgba(200,169,110,0.15);
+  border-left: 2px solid var(--gold);
+  padding: 3px 6px;
+  border-radius: 0 3px 3px 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: #8A6A30;
+  margin-bottom: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-event.linkedin { border-color: #0a66c2; background: rgba(10,102,194,0.07); color: #0a66c2; }
+.cal-event.twitter { border-color: #1da1f2; background: rgba(29,161,242,0.07); color: #1da1f2; }
+.cal-event.instagram { border-color: #c13584; background: rgba(193,53,132,0.07); color: #c13584; }
+.cal-event.newsletter { border-color: var(--sage); background: rgba(74,103,65,0.07); color: var(--sage); }
+
+/* ─── PRICING SECTION ─── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.pricing-card {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.pricing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.pricing-card.featured { border-color: var(--gold); }
+
+.pricing-header {
+  padding: 28px;
+  background: var(--paper);
+  border-bottom: 1.5px solid var(--border);
+}
+
+.pricing-card.featured .pricing-header { background: var(--ink); }
+
+.pricing-tier {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.pricing-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.pricing-card.featured .pricing-name { color: var(--cream); }
+
+.pricing-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.pricing-freq {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+.pricing-card.featured .pricing-freq { color: var(--mist); }
+
+.pricing-body { padding: 24px 28px; background: white; }
+
+.pricing-feature {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 7px 0;
+  font-size: 13px;
+  color: #555;
+  border-bottom: 1px solid var(--border);
+}
+
+.pricing-feature:last-child { border-bottom: none; }
+
+.check { color: var(--sage); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.cross { color: #ccc; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── PILLAR SYSTEM ─── */
+.pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+
+.pillar-card {
+  border-radius: 8px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pillar-card:hover { transform: translateY(-3px); }
+
+.pillar-emoji { font-size: 24px; margin-bottom: 8px; }
+.pillar-name { font-weight: 700; font-size: 12px; margin-bottom: 4px; }
+.pillar-pct { font-family: 'DM Mono', monospace; font-size: 11px; opacity: 0.7; }
+
+.pillar-authority { background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.3); color: #8A6A30; }
+.pillar-story { background: rgba(184,92,56,0.1); border: 1px solid rgba(184,92,56,0.25); color: var(--rust); }
+.pillar-education { background: rgba(74,103,65,0.1); border: 1px solid rgba(74,103,65,0.25); color: var(--sage); }
+.pillar-engagement { background: rgba(58,74,92,0.1); border: 1px solid rgba(58,74,92,0.25); color: var(--steel); }
+.pillar-conversion { background: rgba(122,92,138,0.1); border: 1px solid rgba(122,92,138,0.25); color: var(--accent3); }
+
+/* ─── TIPS BOX ─── */
+.tip-box {
+  background: linear-gradient(135deg, rgba(200,169,110,0.08) 0%, rgba(184,92,56,0.06) 100%);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 14px;
+}
+
+.tip-icon {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.tip-content {}
+.tip-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+.tip-text { font-size: 13px; line-height: 1.7; color: var(--ink); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .hooks-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page.active { animation: fadeIn 0.3s ease; }
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ─── SCROLL ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ─── UTILITY ─── */
+.divider { height: 1px; background: var(--border); margin: 32px 0; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; background: var(--warm); color: #666; margin: 2px; }
+.text-gold { color: var(--gold); }
+.text-muted { color: #888; }
+.font-mono { font-family: 'DM Mono', monospace; }
+.mb-0 { margin-bottom: 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-badge">Digital Product</div>
+    <div class="brand-name">Content OS<br>for Founders</div>
+    <div class="brand-sub">By Uniflex Digitals</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-section-label">Getting Started</div>
+    <a class="nav-item active" onclick="showPage('welcome')">
+      <span class="nav-icon">🏠</span> Welcome & Overview
+    </a>
+
+    <div class="nav-section-label">System Modules</div>
+    <a class="nav-item" onclick="showPage('roadmap')">
+      <span class="nav-icon">🗺️</span> 90-Day Roadmap
+    </a>
+    <a class="nav-item" onclick="showPage('pillars')">
+      <span class="nav-icon">🏛️</span> Content Pillars
+    </a>
+    <a class="nav-item" onclick="showPage('hooks')">
+      <span class="nav-icon">🪝</span> Hook Bank
+    </a>
+    <a class="nav-item" onclick="showPage('frameworks')">
+      <span class="nav-icon">📖</span> Storytelling Frameworks
+    </a>
+    <a class="nav-item" onclick="showPage('templates')">
+      <span class="nav-icon">📋</span> Posting Templates
+    </a>
+    <a class="nav-item" onclick="showPage('calendar')">
+      <span class="nav-icon">📅</span> Content Calendar
+    </a>
+    <a class="nav-item" onclick="showPage('analytics')">
+      <span class="nav-icon">📊</span> Analytics Tracker
+    </a>
+
+    <div class="nav-section-label">Product Guide</div>
+    <a class="nav-item" onclick="showPage('pricing')">
+      <span class="nav-icon">💰</span> Price & Package
+    </a>
+    <a class="nav-item" onclick="showPage('customise')">
+      <span class="nav-icon">🎨</span> Customise & Brand
+    </a>
+  </div>
+
+  <div class="sidebar-footer">
+    <strong>Okelola Surprise</strong>
+    Strategy · Storytelling · Growth<br>
+    Uniflex Digitals
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+<main class="main">
+
+<!-- ══════════════ PAGE: WELCOME ══════════════ -->
+<div id="page-welcome" class="page active">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Getting Started</div>
+      <div class="page-title">Welcome to Your Content OS</div>
+      <div class="page-desc">Everything you need to run content like a media company — built for founders, coaches, and tech professionals.</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-gold" onclick="showPage('roadmap')">Start 90-Day Roadmap →</button>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="welcome-hero">
+      <div class="hero-eyebrow">Content Operating System · v1.0</div>
+      <div class="hero-headline">Your content.<br><em>Systemised.</em> Scalable.<br>Always on brand.</div>
+      <div class="hero-body">Most founders create content reactively — posting when they feel inspired, burning out, going quiet, then repeating. This system ends that cycle. You'll run your content like a media company: with strategy, structure, and a machine that runs without you having to think from scratch every time.</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">90</div>
+          <div class="hero-stat-label">Day Roadmap</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">50+</div>
+          <div class="hero-stat-label">Proven Hooks</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">5</div>
+          <div class="hero-stat-label">Story Frameworks</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">20+</div>
+          <div class="hero-stat-label">Post Templates</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">What's Inside This System</div>
+      </div>
+      <div class="card-grid">
+        <div class="card" onclick="showPage('roadmap')" style="cursor:pointer">
+          <div class="card-icon gold">🗺️</div>
+          <div class="card-title">90-Day Content Roadmap</div>
+          <div class="card-body">A phased, week-by-week implementation plan that takes you from zero to consistent, strategic publishing. Clear milestones for every stage.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+        <div class="card" onclick="showPage('hooks')" style="cursor:pointer">
+          <div class="card-icon rust">🪝</div>
+          <div class="card-title">Viral Hook Bank</div>
+          <div class="card-body">50+ proven hook formulas for B2B founders and tech professionals. Categorised by type, with the psychological reason each one works.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+        <div class="card" onclick="showPage('frameworks')" style="cursor:pointer">
+          <div class="card-icon sage">📖</div>
+          <div class="card-title">Storytelling Frameworks</div>
+          <div class="card-body">5 distinct narrative structures to turn your experiences, insights, and client results into compelling content that converts.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+        <div class="card" onclick="showPage('templates')" style="cursor:pointer">
+          <div class="card-icon steel">📋</div>
+          <div class="card-title">Weekly Posting Templates</div>
+          <div class="card-body">Fill-in-the-blank templates for LinkedIn, X, Instagram, and newsletters. Batch a full week of content in under 2 hours.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+        <div class="card" onclick="showPage('analytics')" style="cursor:pointer">
+          <div class="card-icon purple">📊</div>
+          <div class="card-title">Analytics Dashboard</div>
+          <div class="card-body">Track engagement, follower growth, and leads generated. Identify your top-performing content and replicate what works.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+        <div class="card" onclick="showPage('calendar')" style="cursor:pointer">
+          <div class="card-icon gold">📅</div>
+          <div class="card-title">Content Calendar</div>
+          <div class="card-body">A visual monthly view of your entire content schedule. Plan campaigns, track publishing, and never miss a posting day.</div>
+          <div class="card-link">Open Module →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">How to Use This System</div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Define your content pillars (Week 1)</div>
+            <div class="step-desc">Head to the Content Pillars module and choose your 5 core themes. These are the buckets every piece of content will live in — tied directly to your business goals and ideal client.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Set up your Hook Bank and Frameworks (Week 1–2)</div>
+            <div class="step-desc">Bookmark the Hook Bank and Storytelling Frameworks. These two modules are your creative engine — return to them every time you sit down to write.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Batch content weekly using the Templates (Week 2+)</div>
+            <div class="step-desc">Every Monday (or your chosen batching day), open the Posting Templates, pick your formats for the week, fill in the blanks, and schedule. Aim for 3–5 pieces of content per week minimum.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Track and iterate with the Analytics Dashboard (Weekly)</div>
+            <div class="step-desc">Every Friday, log your key metrics. After 4 weeks you'll have enough data to see what's resonating. Double down on your top formats and hooks. Retire what isn't working.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Review and evolve (Monthly)</div>
+            <div class="step-desc">At the end of each month, review your top content, update your pillars if needed, and plan the next month's calendar. Treat your content OS like a business — it needs regular maintenance to grow.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">💡</div>
+      <div class="tip-content">
+        <div class="tip-label">Pro Tip — Founder's Mindset</div>
+        <div class="tip-text">Treat your content like a product, not a hobby. The founders who grow fastest are those who approach content with the same rigour they apply to their business: systems, testing, data, iteration. This OS is your content product infrastructure.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: 90-DAY ROADMAP ══════════════ -->
+<div id="page-roadmap" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 01</div>
+      <div class="page-title">90-Day Content Roadmap</div>
+      <div class="page-desc">A phased plan that takes you from setup to consistent, strategic publishing with clear milestones every step of the way.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">The Three Phases</div></div>
+      <div class="phase-grid">
+        <div class="phase-card phase-1">
+          <div class="phase-number">1</div>
+          <div class="phase-label">Phase One</div>
+          <div class="phase-title">Foundation & Infrastructure</div>
+          <div class="phase-weeks">Weeks 1–4</div>
+          <ul class="phase-tasks">
+            <li>Define 5 content pillars tied to business goals</li>
+            <li>Audit & optimise all platform profiles</li>
+            <li>Build your Ideal Client Message (ICM) document</li>
+            <li>Set up content batching workflow</li>
+            <li>Create brand voice & tone guide</li>
+            <li>Publish first 5 pieces across platforms</li>
+          </ul>
+        </div>
+        <div class="phase-card phase-2">
+          <div class="phase-number">2</div>
+          <div class="phase-label">Phase Two</div>
+          <div class="phase-title">Consistency & Momentum</div>
+          <div class="phase-weeks">Weeks 5–8</div>
+          <ul class="phase-tasks">
+            <li>Hit 3–5 posts/week with no gaps</li>
+            <li>Start tracking engagement metrics</li>
+            <li>Test 3 different hook types per platform</li>
+            <li>Launch at least 1 storytelling-format post</li>
+            <li>Begin email list or newsletter</li>
+            <li>Identify your first top-performing content</li>
+          </ul>
+        </div>
+        <div class="phase-card phase-3">
+          <div class="phase-number">3</div>
+          <div class="phase-label">Phase Three</div>
+          <div class="phase-title">Optimise & Scale</div>
+          <div class="phase-weeks">Weeks 9–13</div>
+          <ul class="phase-tasks">
+            <li>Double down on top-performing formats</li>
+            <li>Introduce repurposing system (1 → 5 pieces)</li>
+            <li>Add a conversion-focused content pillar</li>
+            <li>Build content-to-lead tracking</li>
+            <li>Review and update pillars based on data</li>
+            <li>Design next 90-day plan with new goals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Week-by-Week Breakdown</div></div>
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Phase</th>
+            <th>Focus Area</th>
+            <th>Key Deliverables</th>
+            <th>Success Metric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="week-badge">W01</span></td>
+            <td><span class="milestone-tag setup">Setup</span></td>
+            <td><strong>Strategy Foundation</strong></td>
+            <td>Content pillars doc, ICM statement, platform audit complete</td>
+            <td>All profiles optimised, pillars defined</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W02</span></td>
+            <td><span class="milestone-tag setup">Setup</span></td>
+            <td><strong>Brand Voice & First Content</strong></td>
+            <td>Brand voice guide, 5 posts drafted, first post published</td>
+            <td>3 posts live across platforms</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W03</span></td>
+            <td><span class="milestone-tag setup">Setup</span></td>
+            <td><strong>Batching System Launch</strong></td>
+            <td>Weekly batching workflow, content calendar populated for 30 days</td>
+            <td>Full week batched in one session</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W04</span></td>
+            <td><span class="milestone-tag setup">Setup</span></td>
+            <td><strong>Hook Testing Begins</strong></td>
+            <td>Test 3 hook types, document open rates and engagement</td>
+            <td>Data on which hook type performs best</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W05</span></td>
+            <td><span class="milestone-tag grow">Grow</span></td>
+            <td><strong>Consistency Mode</strong></td>
+            <td>5 posts/week rhythm, first storytelling-format post live</td>
+            <td>0 posting gaps, 1 viral-style hook</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W06</span></td>
+            <td><span class="milestone-tag grow">Grow</span></td>
+            <td><strong>Engagement Activation</strong></td>
+            <td>Comment strategy, reply to every comment within 2 hrs</td>
+            <td>Engagement rate up 20% from week 1</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W07</span></td>
+            <td><span class="milestone-tag grow">Grow</span></td>
+            <td><strong>Lead Magnet + Email List</strong></td>
+            <td>First lead magnet created, email list setup, 1 CTA post per week</td>
+            <td>First 25 email subscribers</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W08</span></td>
+            <td><span class="milestone-tag grow">Grow</span></td>
+            <td><strong>Data Review + Pivot</strong></td>
+            <td>30-day analytics review, top-performing content identified</td>
+            <td>Clear data on top 3 performing post types</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W09</span></td>
+            <td><span class="milestone-tag scale">Scale</span></td>
+            <td><strong>Repurposing System</strong></td>
+            <td>1 pillar piece → 5 derivative posts workflow live</td>
+            <td>1 long-form repurposed into 5 micro-posts</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W10</span></td>
+            <td><span class="milestone-tag scale">Scale</span></td>
+            <td><strong>Conversion Content Pillar</strong></td>
+            <td>Add client results/social proof pillar, first offer post</td>
+            <td>First inbound DM or enquiry from content</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W11</span></td>
+            <td><span class="milestone-tag scale">Scale</span></td>
+            <td><strong>Authority Acceleration</strong></td>
+            <td>Guest post, collab, or media placement outreach</td>
+            <td>1 collaboration opportunity initiated</td>
+          </tr>
+          <tr>
+            <td><span class="week-badge">W12</span></td>
+            <td><span class="milestone-tag scale">Scale</span></td>
+            <td><strong>System Audit + Next Plan</strong></td>
+            <td>Full 90-day review, new goals set, next roadmap drafted</td>
+            <td>Documented results + new 90-day plan ready</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Platform-Specific Strategy Guide</div></div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon" style="background:rgba(10,102,194,0.1)">💼</div>
+          <div class="card-title">LinkedIn Strategy</div>
+          <div class="card-body"><strong>Best for:</strong> B2B founders, thought leadership, professional credibility<br><br><strong>Frequency:</strong> 4–5x per week<br><strong>Best formats:</strong> Text posts (1,200–1,800 chars), carousels, long-form articles<br><br><strong>Content mix:</strong> 40% educational, 30% personal story, 20% opinion, 10% CTA</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(29,161,242,0.1)">𝕏</div>
+          <div class="card-title">X / Twitter Strategy</div>
+          <div class="card-body"><strong>Best for:</strong> Real-time commentary, tech founders, building following fast<br><br><strong>Frequency:</strong> 3–5x per day<br><strong>Best formats:</strong> Threads (5–15 tweets), single punchy takes, replies<br><br><strong>Content mix:</strong> 50% takes/opinions, 30% threads, 20% replies to trending topics</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(193,53,132,0.1)">📸</div>
+          <div class="card-title">Instagram Strategy</div>
+          <div class="card-body"><strong>Best for:</strong> Visual brand building, coaching, lifestyle founders<br><br><strong>Frequency:</strong> 4–5 feed posts/week + 5–7 Stories/day<br><strong>Best formats:</strong> Carousels, Reels (15–30s), quote graphics<br><br><strong>Content mix:</strong> 35% educational, 35% personal brand, 30% community engagement</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(74,103,65,0.1)">✉️</div>
+          <div class="card-title">Newsletter Strategy</div>
+          <div class="card-body"><strong>Best for:</strong> Deep relationship building, monetisation, owned audience<br><br><strong>Frequency:</strong> 1x per week (non-negotiable)<br><strong>Best formats:</strong> Curated insights, case studies, behind-the-scenes<br><br><strong>Content mix:</strong> 50% teaching, 30% story, 20% recommendation/offer</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: CONTENT PILLARS ══════════════ -->
+<div id="page-pillars" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 02</div>
+      <div class="page-title">Content Pillars System</div>
+      <div class="page-desc">Your 5 content pillars are the strategic buckets every post lives in — tied to your business goals and ideal client journey.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Your 5 Content Pillars</div></div>
+      <div class="pillars">
+        <div class="pillar-card pillar-authority">
+          <div class="pillar-emoji">🏆</div>
+          <div class="pillar-name">Authority</div>
+          <div class="pillar-pct">25%</div>
+        </div>
+        <div class="pillar-card pillar-story">
+          <div class="pillar-emoji">📖</div>
+          <div class="pillar-name">Story</div>
+          <div class="pillar-pct">20%</div>
+        </div>
+        <div class="pillar-card pillar-education">
+          <div class="pillar-emoji">🎓</div>
+          <div class="pillar-name">Education</div>
+          <div class="pillar-pct">25%</div>
+        </div>
+        <div class="pillar-card pillar-engagement">
+          <div class="pillar-emoji">💬</div>
+          <div class="pillar-name">Engagement</div>
+          <div class="pillar-pct">15%</div>
+        </div>
+        <div class="pillar-card pillar-conversion">
+          <div class="pillar-emoji">🎯</div>
+          <div class="pillar-name">Conversion</div>
+          <div class="pillar-pct">15%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Pillar Deep Dives</div></div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-icon gold">🏆</div>
+          <div class="card-title">Pillar 1: Authority</div>
+          <div class="card-body"><strong>Goal:</strong> Establish you as the expert to go to in your niche<br><br><strong>Content types:</strong> Data-backed insights, industry commentary, case studies, results, speaking appearances<br><br><strong>Example topics for founders:</strong><br>
+          <span class="tag">My methodology for X</span>
+          <span class="tag">What the data says about Y</span>
+          <span class="tag">After 200 clients, here's what I know</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon rust">📖</div>
+          <div class="card-title">Pillar 2: Story</div>
+          <div class="card-body"><strong>Goal:</strong> Build emotional connection and trust through narrative<br><br><strong>Content types:</strong> Origin stories, failure lessons, milestone moments, personal values, day-in-the-life<br><br><strong>Example topics for founders:</strong><br>
+          <span class="tag">The day I almost quit</span>
+          <span class="tag">What nobody told me about year 1</span>
+          <span class="tag">The mistake that cost me $X</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon sage">🎓</div>
+          <div class="card-title">Pillar 3: Education</div>
+          <div class="card-body"><strong>Goal:</strong> Demonstrate expertise through valuable teaching content<br><br><strong>Content types:</strong> How-to guides, frameworks, tool breakdowns, step-by-step tutorials, FAQ content<br><br><strong>Example topics for founders:</strong><br>
+          <span class="tag">5 steps to do X</span>
+          <span class="tag">The framework I use for Y</span>
+          <span class="tag">How to avoid Z mistake</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon steel">💬</div>
+          <div class="card-title">Pillar 4: Engagement</div>
+          <div class="card-body"><strong>Goal:</strong> Drive conversation, comments, and community growth<br><br><strong>Content types:</strong> Polls, hot takes, controversial opinions, relatable moments, questions<br><br><strong>Example topics for founders:</strong><br>
+          <span class="tag">Hot take: X is overrated</span>
+          <span class="tag">Agree or disagree?</span>
+          <span class="tag">The hardest part of building X is…</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">🎯</div>
+          <div class="card-title">Pillar 5: Conversion</div>
+          <div class="card-body"><strong>Goal:</strong> Move warm audience toward booking, buying, or contacting you<br><br><strong>Content types:</strong> Client results/testimonials, process reveals, offer explanation, FAQ about working together<br><br><strong>Example topics for founders:</strong><br>
+          <span class="tag">Here's what working with me looks like</span>
+          <span class="tag">My client went from X to Y</span>
+          <span class="tag">Spots open for [service]</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon gold">✍️</div>
+          <div class="card-title">Ideal Client Message (ICM)</div>
+          <div class="card-body"><strong>How to write your ICM:</strong><br><br>Complete this statement: <em>"I help [SPECIFIC PERSON] who struggles with [PAIN POINT] to achieve [SPECIFIC OUTCOME] through [YOUR METHOD], so they can [TRANSFORMATION]."</em><br><br>Every piece of content should be written <em>for</em> this person. Use their language, address their fears, celebrate their wins.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">💡</div>
+      <div class="tip-content">
+        <div class="tip-label">Pillar Mapping Rule</div>
+        <div class="tip-text">Before publishing any piece of content, assign it to a pillar. If it doesn't fit any pillar, it doesn't belong in your content strategy. This keeps your brand positioning tight and your messaging consistent — even when you hire someone to help create content.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: HOOK BANK ══════════════ -->
+<div id="page-hooks" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 03</div>
+      <div class="page-title">Viral Hook Bank</div>
+      <div class="page-desc">50+ proven hook formulas for B2B founders and tech professionals. Filter by type, copy, and adapt.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="hook-filters">
+      <button class="filter-btn active" onclick="filterHooks('all', this)">All Hooks</button>
+      <button class="filter-btn" onclick="filterHooks('curiosity', this)">🔍 Curiosity</button>
+      <button class="filter-btn" onclick="filterHooks('pain', this)">⚡ Pain Point</button>
+      <button class="filter-btn" onclick="filterHooks('controversy', this)">🔥 Controversial</button>
+      <button class="filter-btn" onclick="filterHooks('story', this)">📖 Story</button>
+      <button class="filter-btn" onclick="filterHooks('result', this)">🏆 Result-Driven</button>
+      <button class="filter-btn" onclick="filterHooks('question', this)">❓ Question</button>
+    </div>
+
+    <div class="hooks-grid" id="hooks-grid">
+
+      <!-- CURIOSITY HOOKS -->
+      <div class="hook-card" data-type="curiosity">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge curiosity">🔍 Curiosity</div>
+        <div class="hook-text">"The thing nobody tells you about building a 7-figure business from content alone."</div>
+        <div class="hook-formula">Formula: "The thing nobody tells you about [DESIRABLE OUTCOME]"</div>
+        <div class="hook-why">Creates an information gap. 'Nobody tells you' implies the audience is missing critical insider knowledge — they must read on to fill the gap.</div>
+      </div>
+
+      <div class="hook-card" data-type="curiosity">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge curiosity">🔍 Curiosity</div>
+        <div class="hook-text">"I studied the top 50 SaaS founders on LinkedIn. Here's what they all post differently."</div>
+        <div class="hook-formula">Formula: "I studied [NUMBER] [AUTHORITY FIGURES]. Here's what they all [DO DIFFERENTLY]."</div>
+        <div class="hook-why">Research framing gives credibility. Pattern recognition from a large sample signals a universal insight worth discovering.</div>
+      </div>
+
+      <div class="hook-card" data-type="curiosity">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge curiosity">🔍 Curiosity</div>
+        <div class="hook-text">"There's a reason some founders close $50K deals from one post. It's not what you think."</div>
+        <div class="hook-formula">Formula: "There's a reason [IMPRESSIVE OUTCOME]. It's not what you think."</div>
+        <div class="hook-why">'Not what you think' directly challenges assumptions and forces engagement from anyone with a theory about the reason.</div>
+      </div>
+
+      <div class="hook-card" data-type="curiosity">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge curiosity">🔍 Curiosity</div>
+        <div class="hook-text">"What separates a $500/month freelancer from a $5,000/month consultant is one thing."</div>
+        <div class="hook-formula">Formula: "What separates [LOWER TIER] from [HIGHER TIER] is [ONE THING]."</div>
+        <div class="hook-why">Income comparison creates aspiration. 'One thing' creates a curiosity gap that's compelling because of its simplicity.</div>
+      </div>
+
+      <!-- PAIN POINT HOOKS -->
+      <div class="hook-card" data-type="pain">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge pain">⚡ Pain Point</div>
+        <div class="hook-text">"If you're posting every day and your audience still isn't growing, this is why."</div>
+        <div class="hook-formula">Formula: "If you're [DOING THE RIGHT THING] and [PAINFUL RESULT STILL HAPPENING], this is why."</div>
+        <div class="hook-why">Addresses the specific frustration of effort without results — the most painful creator experience. Creates immediate identification and urgency.</div>
+      </div>
+
+      <div class="hook-card" data-type="pain">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge pain">⚡ Pain Point</div>
+        <div class="hook-text">"Most founders are invisible online — not because they lack expertise, but because of this."</div>
+        <div class="hook-formula">Formula: "Most [YOUR AUDIENCE] struggle with [PROBLEM] — not because of [OBVIOUS REASON], but because of [REAL REASON]."</div>
+        <div class="hook-why">Separates the symptom from the root cause. 'Not because of [obvious]' creates relief and reframes the problem, making the solution feel accessible.</div>
+      </div>
+
+      <div class="hook-card" data-type="pain">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge pain">⚡ Pain Point</div>
+        <div class="hook-text">"You're not bad at content. You're just building on the wrong foundation."</div>
+        <div class="hook-formula">Formula: "You're not bad at [SKILL]. You're just [REAL DIAGNOSIS]."</div>
+        <div class="hook-why">Exonerates the reader from blame while redirecting to the real issue. Combines empathy with a credibility-building reframe.</div>
+      </div>
+
+      <div class="hook-card" data-type="pain">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge pain">⚡ Pain Point</div>
+        <div class="hook-text">"Burning out from content creation is a strategy problem, not a willpower problem."</div>
+        <div class="hook-formula">Formula: "[PAINFUL EXPERIENCE] is a [REAL CAUSE] problem, not a [MISDIAGNOSED CAUSE] problem."</div>
+        <div class="hook-why">Removes self-blame and repositions the problem structurally — making the reader feel understood and solution-oriented rather than inadequate.</div>
+      </div>
+
+      <!-- CONTROVERSIAL HOOKS -->
+      <div class="hook-card" data-type="controversy">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge controversy">🔥 Controversial</div>
+        <div class="hook-text">"Consistency is the worst content advice you'll ever receive. Here's what actually works."</div>
+        <div class="hook-formula">Formula: "[Popular Advice] is the worst [CATEGORY] advice. Here's what actually works."</div>
+        <div class="hook-why">Directly challenges the most-given piece of advice in the niche. Forces creators to either agree or disagree — both responses drive comment engagement.</div>
+      </div>
+
+      <div class="hook-card" data-type="controversy">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge controversy">🔥 Controversial</div>
+        <div class="hook-text">"Your personal brand doesn't need more content. It needs a clearer point of view."</div>
+        <div class="hook-formula">Formula: "Your [THING THEY'RE FOCUSED ON] doesn't need more [ACTION]. It needs [REAL SOLUTION]."</div>
+        <div class="hook-why">Challenges the default solution (more content) and replaces it with something more nuanced. Triggers self-reflection and debate.</div>
+      </div>
+
+      <div class="hook-card" data-type="controversy">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge controversy">🔥 Controversial</div>
+        <div class="hook-text">"The founders building the most traction right now aren't the most talented. They're the most visible."</div>
+        <div class="hook-formula">Formula: "The [PEOPLE SUCCEEDING] aren't the most [EXPECTED QUALITY]. They're the most [UNEXPECTED QUALITY]."</div>
+        <div class="hook-why">Challenges the meritocracy myth and makes visibility feel both important and achievable. Will generate strong reactions from both camps.</div>
+      </div>
+
+      <div class="hook-card" data-type="controversy">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge controversy">🔥 Controversial</div>
+        <div class="hook-text">"Hiring a content manager before building your content strategy is like hiring staff before you have a business."</div>
+        <div class="hook-formula">Formula: "[COMMON PREMATURE ACTION] before [PREREQUISITE] is like [VIVID ANALOGY]."</div>
+        <div class="hook-why">Vivid analogy makes the point undeniable. Will trigger agreement from strategists and mild defensiveness from those who have made this mistake.</div>
+      </div>
+
+      <!-- STORY HOOKS -->
+      <div class="hook-card" data-type="story">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge story">📖 Story</div>
+        <div class="hook-text">"I landed a $30,000 client from a LinkedIn post I almost didn't publish. Here's the full story."</div>
+        <div class="hook-formula">Formula: "I [IMPRESSIVE RESULT] from [ACTION] I almost didn't [DO]. Here's the full story."</div>
+        <div class="hook-why">Near-miss success is more believable and relatable than planned success. 'Full story' signals authentic disclosure rather than a highlight reel.</div>
+      </div>
+
+      <div class="hook-card" data-type="story">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge story">📖 Story</div>
+        <div class="hook-text">"3 years ago I was writing proposals that nobody responded to. Last month I closed 4 clients without one."</div>
+        <div class="hook-formula">Formula: "[TIME] ago I was [STRUGGLING SITUATION]. [RECENT TIME] I [IMPRESSIVE RESULT] without [OLD STRUGGLE]."</div>
+        <div class="hook-why">Clear before-and-after creates aspiration. Specific timeframes make the transformation feel achievable rather than theoretical.</div>
+      </div>
+
+      <div class="hook-card" data-type="story">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge story">📖 Story</div>
+        <div class="hook-text">"The day my biggest client fired me taught me everything I needed to know about building a real business."</div>
+        <div class="hook-formula">Formula: "The day [PAINFUL EVENT] taught me everything about [VALUABLE LESSON]."</div>
+        <div class="hook-why">Loss-as-lesson narrative is universally relatable and emotionally compelling. Creates empathy while promising a valuable take-away.</div>
+      </div>
+
+      <div class="hook-card" data-type="story">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge story">📖 Story</div>
+        <div class="hook-text">"Nobody believed this would work. 18 months later, it's the only thing that does."</div>
+        <div class="hook-formula">Formula: "Nobody believed [YOUR APPROACH] would work. [TIME LATER], it's [RESULT]."</div>
+        <div class="hook-why">Underdog validation arc is deeply satisfying to follow. Creates curiosity about the approach and delivers a reward to skeptics who stayed to read.</div>
+      </div>
+
+      <!-- RESULT-DRIVEN HOOKS -->
+      <div class="hook-card" data-type="result">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge result">🏆 Result-Driven</div>
+        <div class="hook-text">"My client grew from 800 to 12,000 LinkedIn followers in 90 days. Here's the exact system."</div>
+        <div class="hook-formula">Formula: "My client grew from [START] to [END] in [TIME]. Here's the exact system."</div>
+        <div class="hook-why">'Exact system' promises replicable results. Specific numbers create credibility. Third-person results are often more trusted than self-reported results.</div>
+      </div>
+
+      <div class="hook-card" data-type="result">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge result">🏆 Result-Driven</div>
+        <div class="hook-text">"I generated 47 qualified leads in 30 days using only organic LinkedIn content. No ads. No cold DMs."</div>
+        <div class="hook-formula">Formula: "I generated [SPECIFIC RESULT] in [TIME] using only [METHOD]. No [ALTERNATIVE]. No [ALTERNATIVE]."</div>
+        <div class="hook-why">'No ads, no cold DMs' removes the objections immediately. Organic-only result feels more accessible and sustainable to most founders.</div>
+      </div>
+
+      <div class="hook-card" data-type="result">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge result">🏆 Result-Driven</div>
+        <div class="hook-text">"This single content format brought in more revenue than all my paid ads combined."</div>
+        <div class="hook-formula">Formula: "This single [FORMAT/STRATEGY] brought in more [METRIC] than [COMPARISON]."</div>
+        <div class="hook-why">Single format outperforming paid channels is both surprising and commercially motivating. Creates curiosity about the specific format.</div>
+      </div>
+
+      <div class="hook-card" data-type="result">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge result">🏆 Result-Driven</div>
+        <div class="hook-text">"From charging $500/month to $5,000/month in 6 months — here's the positioning shift that made it possible."</div>
+        <div class="hook-formula">Formula: "From [LOWER PRICE] to [HIGHER PRICE] in [TIME] — here's the [SINGLE SHIFT] that made it possible."</div>
+        <div class="hook-why">10x price increase in 6 months is aspirational but believable. 'Positioning shift' reframes the challenge from effort to strategy.</div>
+      </div>
+
+      <!-- QUESTION HOOKS -->
+      <div class="hook-card" data-type="question">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge question">❓ Question</div>
+        <div class="hook-text">"What would happen to your business if 1,000 of your ideal clients discovered you this month?"</div>
+        <div class="hook-formula">Formula: "What would happen to your [BUSINESS/LIFE] if [DESIRABLE SCENARIO] happened [TIME FRAME]?"</div>
+        <div class="hook-why">Forces positive mental simulation. The reader viscerally imagines the outcome, creating desire and engagement with the path you're about to teach.</div>
+      </div>
+
+      <div class="hook-card" data-type="question">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge question">❓ Question</div>
+        <div class="hook-text">"Are you posting content — or are you publishing a strategy? There's a massive difference."</div>
+        <div class="hook-formula">Formula: "Are you [SURFACE ACTION] or [DEEPER INTENTIONAL ACTION]? There's a massive difference."</div>
+        <div class="hook-why">Binary distinction creates self-examination. 'Massive difference' raises stakes and makes the differentiation feel worth understanding.</div>
+      </div>
+
+      <div class="hook-card" data-type="question">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge question">❓ Question</div>
+        <div class="hook-text">"What if your inability to get clients has nothing to do with your skills and everything to do with your visibility?"</div>
+        <div class="hook-formula">Formula: "What if [PROBLEM] has nothing to do with [ASSUMED CAUSE] and everything to do with [REAL CAUSE]?"</div>
+        <div class="hook-why">'What if' opens a hypothesis that challenges the reader's self-diagnosis. Removes ego-threatening causes and replaces them with a fixable one.</div>
+      </div>
+
+      <div class="hook-card" data-type="question">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge question">❓ Question</div>
+        <div class="hook-text">"What's the cost of staying invisible for another 12 months?"</div>
+        <div class="hook-formula">Formula: "What's the cost of [STATUS QUO] for another [TIME PERIOD]?"</div>
+        <div class="hook-why">Forces calculation of opportunity cost. Short, pointed, uncomfortable. Works best for warm audiences who already understand the value of visibility.</div>
+      </div>
+
+      <!-- BONUS HOOKS -->
+      <div class="hook-card" data-type="curiosity">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge curiosity">🔍 Curiosity</div>
+        <div class="hook-text">"I reverse-engineered 100 viral posts. Every single one had this hidden element."</div>
+        <div class="hook-formula">Formula: "I reverse-engineered [NUMBER] [CONTENT TYPE]. Every single one had [HIDDEN ELEMENT]."</div>
+        <div class="hook-why">Systematic research claim with a universal finding. 'Hidden element' creates information gap and promises an insight that can be immediately applied.</div>
+      </div>
+
+      <div class="hook-card" data-type="story">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge story">📖 Story</div>
+        <div class="hook-text">"I sent one tweet in 2022 that completely changed the trajectory of my business. I still think about it."</div>
+        <div class="hook-formula">Formula: "I [ACTION] in [YEAR] that completely changed [ASPECT OF BUSINESS/LIFE]. I still [EMOTIONAL RESPONSE]."</div>
+        <div class="hook-why">Specific year, singular action, and emotional residue create vivid storytelling. The lingering emotional response signals deep significance worth understanding.</div>
+      </div>
+
+      <div class="hook-card" data-type="pain">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge pain">⚡ Pain Point</div>
+        <div class="hook-text">"You'll never out-post a founder who has a system. But you can outperform them with the right one."</div>
+        <div class="hook-formula">Formula: "You'll never out-[EFFORT METRIC] someone with [ADVANTAGE]. But you can [WIN] with [YOUR SOLUTION]."</div>
+        <div class="hook-why">Acknowledges the real competitive landscape (systems beat hustle) while immediately offering hope. Creates urgency without despair.</div>
+      </div>
+
+      <div class="hook-card" data-type="result">
+        <button class="hook-copy-btn" onclick="copyHook(this)">📋</button>
+        <div class="hook-type-badge result">🏆 Result-Driven</div>
+        <div class="hook-text">"My best-performing post in 2024 was written in 12 minutes. My worst took 3 hours. Here's what I learned."</div>
+        <div class="hook-formula">Formula: "My [BEST PERFORMING] took [SHORT TIME]. My [WORST PERFORMING] took [LONG TIME]. Here's what I learned."</div>
+        <div class="hook-why">Counterintuitive time-to-quality relationship challenges the effort-equals-results belief. Gives permission to work faster while promising a strategic insight.</div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="tip-box">
+      <div class="tip-icon">🗂️</div>
+      <div class="tip-content">
+        <div class="tip-label">Hook Bank Management System</div>
+        <div class="tip-text">Add new hooks to your bank every week. When you see a piece of content stop you mid-scroll, write down the first sentence and the formula behind it. Tag it by type and niche. Within 3 months you'll have a personalised, tested hook library that reflects what works for your specific audience.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: STORYTELLING FRAMEWORKS ══════════════ -->
+<div id="page-frameworks" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 04</div>
+      <div class="page-title">Storytelling Frameworks</div>
+      <div class="page-desc">5 narrative structures that transform your experiences into compelling content. Each one is designed for a specific content goal.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="framework-tabs">
+      <div class="framework-tab active" onclick="showFramework('transformation', this)">1. Transformation</div>
+      <div class="framework-tab" onclick="showFramework('struggle', this)">2. Struggle-to-Success</div>
+      <div class="framework-tab" onclick="showFramework('lesson', this)">3. Lesson Learned</div>
+      <div class="framework-tab" onclick="showFramework('behind', this)">4. Behind-the-Scenes</div>
+      <div class="framework-tab" onclick="showFramework('client', this)">5. Client Results</div>
+    </div>
+
+    <!-- TRANSFORMATION FRAMEWORK -->
+    <div id="framework-transformation" class="framework-content active">
+      <div class="framework-hero">
+        <div class="framework-name">The Transformation Story</div>
+        <div class="framework-tagline">Show who you were, what changed, and who you became — positioning you as proof that transformation is possible for your audience.</div>
+        <div class="framework-meta">
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Best For</div>
+            <div class="framework-meta-value">Personal brand, authority building</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Platform</div>
+            <div class="framework-meta-value">LinkedIn, Instagram, YouTube</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Goal</div>
+            <div class="framework-meta-value">Inspire, grow followers</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Open with "Before" — the specific struggle</div>
+            <div class="step-desc">Paint a vivid picture of where you were. Use specific details: the number, the feeling, the exact situation. The more specific, the more relatable. Avoid vague language like "I was struggling."</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Identify the turning point</div>
+            <div class="step-desc">What was the single moment, decision, realisation, or event that changed everything? Be specific — a conversation, a piece of advice, a failure that reframed everything. This is the hinge of the story.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Show the "After" — tangible and specific</div>
+            <div class="step-desc">What does your life/business look like now? Use numbers, concrete outcomes, and observable changes. The "after" must feel earned, not miraculous — show the work that happened between turning point and result.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Extract the lesson for your audience</div>
+            <div class="step-desc">Make the takeaway explicit. What should your audience do differently because of your story? This is where you transfer your transformation into their context. It's the bridge from your story to their action.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Close with an invitation</div>
+            <div class="step-desc">Ask a question, invite a comment, or offer a resource. Don't let the story end without a direction for the reader to go. A great transformation story that ends without an invitation is a missed opportunity.</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="example-label">Example — Founder Applied</div>
+        <div class="example-text">"Two years ago I had 340 LinkedIn followers, zero inbound leads, and a growing feeling that content just 'wasn't for me.' I was posting, but it felt like shouting into a void. Then a mentor said something that broke my entire approach open: 'You're creating content to show what you know. Start creating to show who you are.' I changed one thing. My next post got more engagement than the previous 3 months combined. Today I have 18,000 followers and 80% of my clients find me through content. The difference wasn't posting more. It was posting truthfully. What would you change if you stopped hiding your real perspective?"</div>
+      </div>
+    </div>
+
+    <!-- STRUGGLE TO SUCCESS -->
+    <div id="framework-struggle" class="framework-content">
+      <div class="framework-hero">
+        <div class="framework-name">The Struggle-to-Success Arc</div>
+        <div class="framework-tagline">Document the messy middle. Show the real journey — the setbacks, pivots, and persistence — to build deep trust and credibility with your audience.</div>
+        <div class="framework-meta">
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Best For</div>
+            <div class="framework-meta-value">Vulnerability content, credibility</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Platform</div>
+            <div class="framework-meta-value">LinkedIn, YouTube, Newsletter</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Goal</div>
+            <div class="framework-meta-value">Build trust, drive comments</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Set the stakes — what did success mean to you?</div>
+            <div class="step-desc">Why did this matter so much? What were you willing to risk or sacrifice? The reader needs to understand why you kept going despite the difficulty. Stakes create investment in your outcome.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Name the specific obstacles</div>
+            <div class="step-desc">Not generic 'it was hard' but specific obstacles: a rejection, a financial crisis, a failed launch, a relationship that cost you, a period of silence and doubt. The more specific, the more universal the resonance.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Show the decision to continue — the "dark night"</div>
+            <div class="step-desc">What was the lowest point? What made you consider stopping? This is the emotional core of the arc. Readers who have felt the same will feel deeply seen. Don't rush past this part.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Document the turning strategy</div>
+            <div class="step-desc">What did you do differently? What changed — in approach, mindset, resources, or team — that began to shift the trajectory? This is your teachable moment dressed in narrative clothing.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Land the success — and credit the process, not luck</div>
+            <div class="step-desc">Show the result, but explicitly connect it back to the choices you made in step 4. This makes the success feel learnable and repeatable — not accidental or privileged.</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="example-label">Example — Founder Applied</div>
+        <div class="example-text">"Month 9 of my business. Zero revenue. Savings account at $800. I'd told everyone I was building something, and nothing was working. I remember sitting with my laptop at 11pm thinking — am I deluding myself? I came close to emailing my old boss to ask for my job back. What stopped me wasn't confidence. It was one spreadsheet I made that showed the gap between what I was doing and what clients actually needed to see before they'd buy. I changed my offer. I changed my messaging. I started documenting instead of performing. Month 12: first $10,000 month. Month 18: first six-figure quarter. The business didn't change. My strategy did. What's the gap between what you're offering and what your client is actually buying?"</div>
+      </div>
+    </div>
+
+    <!-- LESSON LEARNED -->
+    <div id="framework-lesson" class="framework-content">
+      <div class="framework-hero">
+        <div class="framework-name">The Lesson Learned Framework</div>
+        <div class="framework-tagline">Turn a mistake, failure, or hard experience into a teachable moment. This framework converts your setbacks into your most valuable content.</div>
+        <div class="framework-meta">
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Best For</div>
+            <div class="framework-meta-value">Education, thought leadership</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Platform</div>
+            <div class="framework-meta-value">LinkedIn, Newsletter, Carousel</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Goal</div>
+            <div class="framework-meta-value">Credibility, saves, authority</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Name the mistake or failure openly</div>
+            <div class="step-desc">Don't bury or soften it. State it plainly. "I made a $30,000 mistake." "I hired the wrong person." "I ignored this warning for 18 months." Directness builds trust and hooks attention.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Explain what you believed at the time</div>
+            <div class="step-desc">Context makes the mistake understandable. What did you think you were doing? What made it seem like the right call? This is where you create empathy and show intellectual honesty.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Show the impact — quantify where possible</div>
+            <div class="step-desc">What did it cost? Time, money, relationships, opportunity? Numbers make the stakes real. Being specific here demonstrates maturity and makes the lesson feel earned rather than manufactured.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Extract the specific lesson (not the platitude)</div>
+            <div class="step-desc">Avoid "I learned to trust the process" — go specific. "I learned that hiring someone for skills before checking for values alignment is a predictable failure." Specificity is the difference between insight and cliché.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Give the reader a replicable rule or checklist</div>
+            <div class="step-desc">What is the rule you now live by because of this lesson? Make it memorable and transferable. "I now never [X] before [Y]." This converts a personal story into a portable tool for your audience.</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="example-label">Example — Founder Applied</div>
+        <div class="example-text">"I spent 6 months building a course nobody bought. Not a single sale on launch day. I had convinced myself that if I built something excellent, the audience would come. I was wrong. I built in isolation — no validation, no audience, no pre-launch feedback. The cost: 6 months of work and about $4,000 in tools and design. The lesson: excellence doesn't sell. Relevance does. I now never build anything without validating demand first — at minimum 10 conversations with my ideal client before I invest a week of work. What are you building right now that you haven't validated yet?"</div>
+      </div>
+    </div>
+
+    <!-- BEHIND THE SCENES -->
+    <div id="framework-behind" class="framework-content">
+      <div class="framework-hero">
+        <div class="framework-name">The Behind-the-Scenes Narrative</div>
+        <div class="framework-tagline">Give your audience exclusive access to your process, decisions, and work. Transparency builds loyalty and positions you as a practitioner, not just a theorist.</div>
+        <div class="framework-meta">
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Best For</div>
+            <div class="framework-meta-value">Engagement, community, loyalty</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Platform</div>
+            <div class="framework-meta-value">Instagram Stories, TikTok, YouTube</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Goal</div>
+            <div class="framework-meta-value">Drive comments, grow followers</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Choose a current, real process to document</div>
+            <div class="step-desc">Behind-the-scenes only works when it's genuinely happening — not retrospective. Pick something you're actively doing: a launch, a client project, a rebrand, a hiring decision, a difficult conversation.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Share the messy decision-making</div>
+            <div class="step-desc">Don't just show the polished final result. Show what you're weighing up, what you're uncertain about, what you're going back and forth on. The decision-making process is more interesting than the decision.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Reveal tools, systems, or people involved</div>
+            <div class="step-desc">What specifically are you using, who are you working with, what resources are involved? This creates practical value alongside the narrative.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Create a cliffhanger or open loop</div>
+            <div class="step-desc">If you're documenting a process in real time, don't resolve it immediately. "I'll share the results next week" creates a reason to follow you and return. Open loops are one of the most powerful tools for follower retention.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Invite your audience into the process</div>
+            <div class="step-desc">Ask what they would do. Request feedback on a decision. Make them feel like collaborators, not observers. Participatory content generates dramatically more engagement than broadcast content.</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="example-label">Example — Founder Applied</div>
+        <div class="example-text">"Week 3 of rebuilding my entire content system from scratch — and I'm going to be honest: it's more work than I thought. Today I mapped every piece of content from the last 12 months against my 5 pillars. The result was uncomfortable. 60% of my content had no clear purpose — it existed to fill space, not to serve my audience or my business. I'm deleting 40 posts. I know that sounds extreme. But I'd rather have a tight, intentional library of 50 posts than a bloated archive of 130. I'll share the new system structure on Friday. If you've ever audited your own content — what surprised you most?"</div>
+      </div>
+    </div>
+
+    <!-- CLIENT RESULTS -->
+    <div id="framework-client" class="framework-content">
+      <div class="framework-hero">
+        <div class="framework-name">The Client Results Story</div>
+        <div class="framework-tagline">The most powerful conversion content you can create. Use your client's transformation as proof of what's possible — while building trust and demonstrating your methodology.</div>
+        <div class="framework-meta">
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Best For</div>
+            <div class="framework-meta-value">Conversion, lead generation</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Platform</div>
+            <div class="framework-meta-value">LinkedIn, Instagram, Newsletter</div>
+          </div>
+          <div class="framework-meta-item">
+            <div class="framework-meta-label">Goal</div>
+            <div class="framework-meta-value">Drive sales enquiries</div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Introduce the client and their "before"</div>
+            <div class="step-desc">Describe your client in terms your ideal prospect recognises themselves in. The more your reader thinks "that's me," the more powerful the social proof. Include specific context: industry, challenge, what they'd tried before.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Describe the challenge you were hired to solve</div>
+            <div class="step-desc">Be specific about the problem. Not 'they needed help with marketing' but 'they were generating $8K/month and had plateaued for 11 months despite doubling their posting frequency.' Precision signals expertise.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Reveal your approach (the methodology)</div>
+            <div class="step-desc">Describe how you approached the problem. This is your methodology on display. Don't give away every detail — but show enough to demonstrate a clear, intentional process. This is what differentiates you from generalists.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Share the results — specific, measurable, time-bound</div>
+            <div class="step-desc">"Grew her LinkedIn presence" is weak. "Grew from 2,100 to 8,400 followers in 90 days, with 3 inbound enterprise enquiries in month 2" is powerful. Always include: the metric, the before number, the after number, and the timeframe.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-title">Include a direct quote or testimonial</div>
+            <div class="step-desc">Client voice carries more weight than your narration. Even one sentence in their words dramatically increases the credibility of the case study. Close with a CTA that's aligned with the prospect who just read this story.</div>
+          </div>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="example-label">Example — Founder Applied</div>
+        <div class="example-text">"6 months ago, Sarah was a talent strategy consultant with deep expertise and almost no online visibility. She'd been posting sporadically for 2 years with no clear strategy and was invisible to the Fortune 500 decision-makers she wanted to reach. We rebuilt her entire content system in 30 days: 5 clear pillars, a consistent hook framework, and a weekly posting rhythm that didn't require her to reinvent the wheel each time. By month 3: 4.2K LinkedIn followers (up from 890). 3 speaking invitations. 2 new enterprise clients — one of which attributed finding her directly to her LinkedIn content. 'I finally feel like my online presence matches my real expertise,' she told me last week. If your content isn't reflecting the quality of what you actually do, let's talk."</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: POSTING TEMPLATES ══════════════ -->
+<div id="page-templates" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 05</div>
+      <div class="page-title">Posting Templates</div>
+      <div class="page-desc">Fill-in-the-blank templates for every platform and format. Batch a full week of content in under 2 hours.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="platform-tabs">
+      <button class="platform-btn active" onclick="showPlatform('linkedin', this)">💼 LinkedIn</button>
+      <button class="platform-btn" onclick="showPlatform('twitter', this)">𝕏 X / Twitter</button>
+      <button class="platform-btn" onclick="showPlatform('instagram', this)">📸 Instagram</button>
+      <button class="platform-btn" onclick="showPlatform('newsletter', this)">✉️ Newsletter</button>
+    </div>
+
+    <!-- LINKEDIN TEMPLATES -->
+    <div id="platform-linkedin" class="platform-content active">
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">📚 Educational / Framework Post</div>
+            <div class="template-format">1,200–1,600 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1</span><span><strong>[HOOK]</strong> — <span class="placeholder">[NUMBER]</span> things most <span class="placeholder">[YOUR AUDIENCE]</span> don't know about <span class="placeholder">[YOUR TOPIC]</span>.</span></div>
+            <div class="template-line"><span class="template-line-num">2</span><span>(Blank line for visual break)</span></div>
+            <div class="template-line"><span class="template-line-num">3</span><span>Here's what actually matters:</span></div>
+            <div class="template-line"><span class="template-line-num">4</span><span><strong>1.</strong> <span class="placeholder">[POINT 1]</span><br>— <span class="placeholder">[One-line explanation]</span></span></div>
+            <div class="template-line"><span class="template-line-num">5</span><span><strong>2.</strong> <span class="placeholder">[POINT 2]</span><br>— <span class="placeholder">[One-line explanation]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6</span><span><strong>3.</strong> <span class="placeholder">[POINT 3 — most important]</span><br>— <span class="placeholder">[Explanation + example]</span></span></div>
+            <div class="template-line"><span class="template-line-num">7</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">8</span><span>Most <span class="placeholder">[AUDIENCE]</span> focus on <span class="placeholder">[WRONG THING]</span>. The ones who <span class="placeholder">[SUCCEED]</span> focus on <span class="placeholder">[RIGHT THING]</span>.</span></div>
+            <div class="template-line"><span class="template-line-num">9</span><span><strong>CTA:</strong> What's been your biggest challenge with <span class="placeholder">[TOPIC]</span>? Tell me below ↓</span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">📖 Personal Story Post</div>
+            <div class="template-format">1,400–1,800 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1</span><span><strong>[STORY HOOK]</strong> — <span class="placeholder">[Specific dramatic opening line]</span></span></div>
+            <div class="template-line"><span class="template-line-num">2</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">3</span><span><span class="placeholder">[CONTEXT — set the scene with specifics]</span></span></div>
+            <div class="template-line"><span class="template-line-num">4</span><span><span class="placeholder">[THE STRUGGLE — what was hard, what was at stake]</span></span></div>
+            <div class="template-line"><span class="template-line-num">5</span><span><span class="placeholder">[THE TURNING POINT — one moment or decision]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">7</span><span><span class="placeholder">[THE OUTCOME — specific, measurable, honest]</span></span></div>
+            <div class="template-line"><span class="template-line-num">8</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">9</span><span>The lesson: <span class="placeholder">[One-sentence takeaway]</span></span></div>
+            <div class="template-line"><span class="template-line-num">10</span><span><strong>CTA:</strong> <span class="placeholder">[Question that invites comments based on the story]</span></span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">🏆 Client Results Post</div>
+            <div class="template-format">900–1,200 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1</span><span><strong>[RESULT HOOK]</strong> — <span class="placeholder">[Client name/description]</span> went from <span class="placeholder">[BEFORE]</span> to <span class="placeholder">[AFTER]</span> in <span class="placeholder">[TIMEFRAME]</span>.</span></div>
+            <div class="template-line"><span class="template-line-num">2</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">3</span><span>Here's what we did:</span></div>
+            <div class="template-line"><span class="template-line-num">4</span><span>→ <span class="placeholder">[Step 1 — specific strategy]</span></span></div>
+            <div class="template-line"><span class="template-line-num">5</span><span>→ <span class="placeholder">[Step 2 — specific tactic]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6</span><span>→ <span class="placeholder">[Step 3 — the key shift]</span></span></div>
+            <div class="template-line"><span class="template-line-num">7</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">8</span><span>"<span class="placeholder">[CLIENT QUOTE — in their exact words]</span>" — <span class="placeholder">[First name, title]</span></span></div>
+            <div class="template-line"><span class="template-line-num">9</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">10</span><span>If <span class="placeholder">[THEIR SITUATION]</span> sounds familiar, <span class="placeholder">[SOFT CTA — DM me / link in bio / comment X]</span></span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">🔥 Opinion / Hot Take Post</div>
+            <div class="template-format">600–900 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1</span><span><strong>[CONTROVERSIAL HOOK]</strong> — <span class="placeholder">[Bold statement that challenges conventional wisdom]</span></span></div>
+            <div class="template-line"><span class="template-line-num">2</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">3</span><span>Here's why I believe this:</span></div>
+            <div class="template-line"><span class="template-line-num">4</span><span><span class="placeholder">[Evidence point 1]</span></span></div>
+            <div class="template-line"><span class="template-line-num">5</span><span><span class="placeholder">[Evidence point 2]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6</span><span><span class="placeholder">[Personal experience or data backing the take]</span></span></div>
+            <div class="template-line"><span class="template-line-num">7</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">8</span><span>The uncomfortable truth: <span class="placeholder">[One-line that lands the point]</span></span></div>
+            <div class="template-line"><span class="template-line-num">9</span><span><strong>CTA:</strong> Agree or disagree? Tell me why ↓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <div class="section-header"><div class="section-title">Weekly LinkedIn Batching Schedule</div></div>
+        <table class="week-table">
+          <thead>
+            <tr><th>Day</th><th>Post Type</th><th>Content Pillar</th><th>Format</th><th>Ideal Time</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Monday</strong></td><td>Educational / Framework</td><td>Education or Authority</td><td>Text post with numbered list</td><td>8–9am</td></tr>
+            <tr><td><strong>Tuesday</strong></td><td>Personal Story</td><td>Story</td><td>Long-form text, 1,400+ chars</td><td>9–10am</td></tr>
+            <tr><td><strong>Wednesday</strong></td><td>Opinion / Hot Take</td><td>Engagement</td><td>Short punchy text, 600–900 chars</td><td>12–1pm</td></tr>
+            <tr><td><strong>Thursday</strong></td><td>Client Results / Proof</td><td>Conversion</td><td>Case study format</td><td>9–10am</td></tr>
+            <tr><td><strong>Friday</strong></td><td>Engagement / Question</td><td>Engagement or Story</td><td>Short + question, 400–600 chars</td><td>10–11am</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- X/TWITTER TEMPLATES -->
+    <div id="platform-twitter" class="platform-content">
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">🧵 Educational Thread</div>
+            <div class="template-format">8–12 tweets</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1/</span><span><strong>[HOOK TWEET]</strong> — <span class="placeholder">[Bold claim or surprising fact]</span>. A thread 🧵</span></div>
+            <div class="template-line"><span class="template-line-num">2/</span><span><strong>The context:</strong> <span class="placeholder">[Why this matters right now]</span></span></div>
+            <div class="template-line"><span class="template-line-num">3/</span><span><strong>Point 1:</strong> <span class="placeholder">[Insight + one-sentence expansion]</span></span></div>
+            <div class="template-line"><span class="template-line-num">4/</span><span><strong>Point 2:</strong> <span class="placeholder">[Insight + example]</span></span></div>
+            <div class="template-line"><span class="template-line-num">5/</span><span><strong>Point 3:</strong> <span class="placeholder">[Counterintuitive insight]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6/</span><span><strong>The mistake most people make:</strong> <span class="placeholder">[Common error]</span></span></div>
+            <div class="template-line"><span class="template-line-num">7/</span><span><strong>What to do instead:</strong> <span class="placeholder">[Actionable alternative]</span></span></div>
+            <div class="template-line"><span class="template-line-num">8/</span><span><strong>TL;DR:</strong> <span class="placeholder">[One-sentence summary]</span>. RT if this helped ↑</span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">⚡ Single Take / Punchy Tweet</div>
+            <div class="template-format">1 tweet, max 280 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">—</span><span><strong>Format A (Comparison):</strong><br><span class="placeholder">[LOW PERFORMER]</span>: does X.<br><span class="placeholder">[HIGH PERFORMER]</span>: does Y.<br>The difference is everything.</span></div>
+            <div class="template-line"><span class="template-line-num">—</span><span><strong>Format B (Reframe):</strong><br>It's not about <span class="placeholder">[COMMON BELIEF]</span>.<br>It's about <span class="placeholder">[REAL DRIVER]</span>.</span></div>
+            <div class="template-line"><span class="template-line-num">—</span><span><strong>Format C (Hot Take):</strong><br>Unpopular opinion: <span class="placeholder">[CONTROVERSIAL STATEMENT]</span>.<br>Fight me.</span></div>
+            <div class="template-line"><span class="template-line-num">—</span><span><strong>Format D (Mini Story):</strong><br>I did <span class="placeholder">[ACTION]</span>.<br>Result: <span class="placeholder">[OUTCOME]</span>.<br>Would not recommend. OR: Would repeat forever.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTAGRAM TEMPLATES -->
+    <div id="platform-instagram" class="platform-content">
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">🎠 Carousel Post</div>
+            <div class="template-format">6–10 slides</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">S1</span><span><strong>Cover Slide:</strong> <span class="placeholder">[BOLD CLAIM or NUMBER]</span> — hook in large text, sub-headline below</span></div>
+            <div class="template-line"><span class="template-line-num">S2</span><span><strong>Context Slide:</strong> "Here's the problem..." — <span class="placeholder">[Pain point description]</span></span></div>
+            <div class="template-line"><span class="template-line-num">S3</span><span><strong>Point 1:</strong> Title + 1–2 lines explanation + visual element</span></div>
+            <div class="template-line"><span class="template-line-num">S4</span><span><strong>Point 2:</strong> Title + 1–2 lines + example</span></div>
+            <div class="template-line"><span class="template-line-num">S5</span><span><strong>Point 3:</strong> Title + 1–2 lines + the surprising insight</span></div>
+            <div class="template-line"><span class="template-line-num">S6</span><span><strong>Summary Slide:</strong> "To recap..." — bullet list of all points</span></div>
+            <div class="template-line"><span class="template-line-num">S7</span><span><strong>CTA Slide:</strong> "Save this for later" + <span class="placeholder">[Soft offer or follow prompt]</span></span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">📹 Reel Caption Template</div>
+            <div class="template-format">Caption: 150–300 chars</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">1</span><span><strong>First line (Hook):</strong> <span class="placeholder">[Mirrors what's said in the first 2 seconds of the Reel]</span> 👇</span></div>
+            <div class="template-line"><span class="template-line-num">2</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">3</span><span><span class="placeholder">[1–2 sentence expansion of the reel's main point]</span></span></div>
+            <div class="template-line"><span class="template-line-num">4</span><span>(Blank line)</span></div>
+            <div class="template-line"><span class="template-line-num">5</span><span><strong>CTA:</strong> Save this 🔖 / Comment <span class="placeholder">[WORD]</span> for <span class="placeholder">[FREE RESOURCE]</span></span></div>
+            <div class="template-line"><span class="template-line-num">6</span><span><span class="placeholder">#hashtag1 #hashtag2 #hashtag3</span> (3–5 niche hashtags)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER TEMPLATES -->
+    <div id="platform-newsletter" class="platform-content">
+      <div class="template-grid">
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">✉️ Weekly Insight Newsletter</div>
+            <div class="template-format">600–900 words</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">SL</span><span><strong>Subject Line:</strong> <span class="placeholder">[Curiosity or benefit-driven subject, max 50 chars]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P1</span><span><strong>Opening Hook:</strong> <span class="placeholder">[1–2 sentence story or counterintuitive observation]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P2</span><span><strong>Context bridge:</strong> "Here's why this matters for <span class="placeholder">[YOUR AUDIENCE DESCRIPTION]</span>…"</span></div>
+            <div class="template-line"><span class="template-line-num">P3</span><span><strong>Main Insight (250–400w):</strong> <span class="placeholder">[Core lesson, framework, or observation — your unique POV]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P4</span><span><strong>Practical Application:</strong> "Here's how to apply this:" → <span class="placeholder">[3 specific action steps]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P5</span><span><strong>This Week's Resource:</strong> <span class="placeholder">[1 tool, article, book, or template recommendation]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P6</span><span><strong>Close:</strong> <span class="placeholder">[Personal sign-off + question to reply to]</span></span></div>
+          </div>
+        </div>
+
+        <div class="template-card">
+          <div class="template-header">
+            <div class="template-name">📊 Case Study Newsletter</div>
+            <div class="template-format">500–700 words</div>
+          </div>
+          <div class="template-body">
+            <div class="template-line"><span class="template-line-num">SL</span><span><strong>Subject:</strong> "How <span class="placeholder">[CLIENT/STORY]</span> went from <span class="placeholder">[BEFORE]</span> to <span class="placeholder">[AFTER]</span>"</span></div>
+            <div class="template-line"><span class="template-line-num">P1</span><span><strong>Setup:</strong> Meet <span class="placeholder">[Client first name + one-line description]</span>. Their challenge: <span class="placeholder">[Specific problem]</span>.</span></div>
+            <div class="template-line"><span class="template-line-num">P2</span><span><strong>The approach:</strong> <span class="placeholder">[Your methodology — 3 steps maximum]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P3</span><span><strong>The results:</strong> <span class="placeholder">[Specific, measurable, time-bound outcomes]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P4</span><span><strong>The lesson for you:</strong> <span class="placeholder">[Transferable insight from the case study]</span></span></div>
+            <div class="template-line"><span class="template-line-num">P5</span><span><strong>CTA:</strong> If this sounds like <span class="placeholder">[reader situation]</span>, <span class="placeholder">[next step — book call / reply / apply]</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: CONTENT CALENDAR ══════════════ -->
+<div id="page-calendar" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 06</div>
+      <div class="page-title">Content Calendar</div>
+      <div class="page-desc">Your visual publishing schedule. Plan, track, and manage all content across every platform in one view.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="calendar-nav">
+      <div class="cal-month">March 2025</div>
+      <div class="cal-controls">
+        <button class="cal-btn">←</button>
+        <button class="cal-btn">→</button>
+        <button class="btn btn-ghost" style="font-size:12px; padding:7px 14px">+ Add Post</button>
+      </div>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="cal-header">
+        <div class="cal-day-header">Mon</div>
+        <div class="cal-day-header">Tue</div>
+        <div class="cal-day-header">Wed</div>
+        <div class="cal-day-header">Thu</div>
+        <div class="cal-day-header">Fri</div>
+        <div class="cal-day-header">Sat</div>
+        <div class="cal-day-header">Sun</div>
+      </div>
+      <div class="cal-days">
+        <div class="cal-day other-month"><div class="cal-day-num">24</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">25</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">26</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">27</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">28</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">1</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">2</div></div>
+
+        <div class="cal-day"><div class="cal-day-num">3</div><div class="cal-event linkedin">LI: Framework Post</div></div>
+        <div class="cal-day"><div class="cal-day-num">4</div><div class="cal-event linkedin">LI: Story Post</div><div class="cal-event instagram">IG: Reel</div></div>
+        <div class="cal-day"><div class="cal-day-num">5</div><div class="cal-event twitter">X: Thread</div></div>
+        <div class="cal-day"><div class="cal-day-num">6</div><div class="cal-event linkedin">LI: Client Results</div></div>
+        <div class="cal-day"><div class="cal-day-num">7</div><div class="cal-event linkedin">LI: Hot Take</div><div class="cal-event newsletter">Newsletter</div></div>
+        <div class="cal-day"><div class="cal-day-num">8</div></div>
+        <div class="cal-day"><div class="cal-day-num">9</div></div>
+
+        <div class="cal-day"><div class="cal-day-num">10</div><div class="cal-event linkedin">LI: Educational</div><div class="cal-event instagram">IG: Carousel</div></div>
+        <div class="cal-day"><div class="cal-day-num">11</div><div class="cal-event linkedin">LI: Personal Story</div></div>
+        <div class="cal-day today"><div class="cal-day-num">12</div><div class="cal-event twitter">X: Hot Take</div></div>
+        <div class="cal-day"><div class="cal-day-num">13</div><div class="cal-event linkedin">LI: Authority Post</div></div>
+        <div class="cal-day"><div class="cal-day-num">14</div><div class="cal-event linkedin">LI: Engagement Q</div><div class="cal-event newsletter">Newsletter</div></div>
+        <div class="cal-day"><div class="cal-day-num">15</div></div>
+        <div class="cal-day"><div class="cal-day-num">16</div></div>
+
+        <div class="cal-day"><div class="cal-day-num">17</div><div class="cal-event linkedin">LI: Framework</div></div>
+        <div class="cal-day"><div class="cal-day-num">18</div><div class="cal-event instagram">IG: Carousel</div><div class="cal-event linkedin">LI: Story</div></div>
+        <div class="cal-day"><div class="cal-day-num">19</div><div class="cal-event twitter">X: Thread</div></div>
+        <div class="cal-day"><div class="cal-day-num">20</div><div class="cal-event linkedin">LI: Results Post</div></div>
+        <div class="cal-day"><div class="cal-day-num">21</div><div class="cal-event newsletter">Newsletter</div><div class="cal-event linkedin">LI: Opinion</div></div>
+        <div class="cal-day"><div class="cal-day-num">22</div></div>
+        <div class="cal-day"><div class="cal-day-num">23</div></div>
+
+        <div class="cal-day"><div class="cal-day-num">24</div><div class="cal-event linkedin">LI: Educational</div></div>
+        <div class="cal-day"><div class="cal-day-num">25</div><div class="cal-event linkedin">LI: Behind Scenes</div></div>
+        <div class="cal-day"><div class="cal-day-num">26</div><div class="cal-event instagram">IG: Reel</div></div>
+        <div class="cal-day"><div class="cal-day-num">27</div><div class="cal-event linkedin">LI: Client Results</div></div>
+        <div class="cal-day"><div class="cal-day-num">28</div><div class="cal-event newsletter">Newsletter</div></div>
+        <div class="cal-day"><div class="cal-day-num">29</div></div>
+        <div class="cal-day"><div class="cal-day-num">30</div></div>
+
+        <div class="cal-day"><div class="cal-day-num">31</div><div class="cal-event linkedin">LI: Monthly Recap</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">1</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">2</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">3</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">4</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">5</div></div>
+        <div class="cal-day other-month"><div class="cal-day-num">6</div></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="three-col" style="margin-top:24px">
+      <div class="tip-box" style="flex-direction:column">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
+          <div class="tip-icon">📋</div>
+          <div class="tip-label">Batching Day Rule</div>
+        </div>
+        <div class="tip-text" style="font-size:12.5px">Dedicate one day per week (Monday recommended) to batch all content for the week ahead. 90 minutes of focused writing beats 20 minutes of daily reactive posting every time.</div>
+      </div>
+      <div class="tip-box" style="flex-direction:column">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
+          <div class="tip-icon">🔁</div>
+          <div class="tip-label">Repurposing Rule</div>
+        </div>
+        <div class="tip-text" style="font-size:12.5px">Every long-form piece of content (newsletter, YouTube, long LinkedIn) should become at least 3 shorter pieces. 1 newsletter → 2 LinkedIn posts + 1 X thread + 1 Instagram carousel.</div>
+      </div>
+      <div class="tip-box" style="flex-direction:column">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
+          <div class="tip-icon">📆</div>
+          <div class="tip-label">Publishing Windows</div>
+        </div>
+        <div class="tip-text" style="font-size:12.5px">LinkedIn: 8–10am weekdays. Instagram: 11am–1pm or 7–9pm. X: 8–9am, 12–1pm, 8–9pm. Newsletter: Tuesday or Thursday morning performs best for B2B founders.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: ANALYTICS ══════════════ -->
+<div id="page-analytics" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Module 07</div>
+      <div class="page-title">Analytics Dashboard</div>
+      <div class="page-desc">Track every metric that matters. Identify what's working, replicate it, and retire what isn't.</div>
+    </div>
+    <div class="header-actions">
+      <select style="padding:8px 14px;border:1px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;background:white">
+        <option>This Month</option>
+        <option>Last 30 Days</option>
+        <option>Last 90 Days</option>
+      </select>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total Followers</div>
+        <div class="metric-value">8,347</div>
+        <div class="metric-change up">↑ +12.4% this month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Avg Engagement Rate</div>
+        <div class="metric-value">4.8%</div>
+        <div class="metric-change up">↑ +0.9% vs last month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Reach</div>
+        <div class="metric-value">124K</div>
+        <div class="metric-change up">↑ +31% this month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Leads Generated</div>
+        <div class="metric-value">23</div>
+        <div class="metric-change up">↑ +8 vs last month</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="chart-container">
+        <div class="chart-title">
+          Follower Growth by Platform
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#0a66c2"></div>LinkedIn</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1da1f2"></div>X</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#c13584"></div>Instagram</div>
+          </div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:40px;background:#0a66c2"></div>
+              <div class="bar" style="height:20px;background:#1da1f2"></div>
+              <div class="bar" style="height:30px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Oct</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:52px;background:#0a66c2"></div>
+              <div class="bar" style="height:28px;background:#1da1f2"></div>
+              <div class="bar" style="height:35px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Nov</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:65px;background:#0a66c2"></div>
+              <div class="bar" style="height:40px;background:#1da1f2"></div>
+              <div class="bar" style="height:42px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Dec</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:80px;background:#0a66c2"></div>
+              <div class="bar" style="height:48px;background:#1da1f2"></div>
+              <div class="bar" style="height:55px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Jan</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:95px;background:#0a66c2"></div>
+              <div class="bar" style="height:55px;background:#1da1f2"></div>
+              <div class="bar" style="height:68px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Feb</div>
+          </div>
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar" style="height:108px;background:#0a66c2"></div>
+              <div class="bar" style="height:62px;background:#1da1f2"></div>
+              <div class="bar" style="height:78px;background:#c13584"></div>
+            </div>
+            <div class="bar-label">Mar</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Monthly Goal Progress</div>
+        <div class="goal-tracker">
+          <div class="goal-item">
+            <div class="goal-header">
+              <div class="goal-name">Follower Growth</div>
+              <div class="goal-status">83% complete</div>
+            </div>
+            <div class="goal-progress"><div class="goal-bar" style="width:83%"></div></div>
+            <div class="goal-numbers"><span>8,347 current</span><span>10,000 goal</span></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-header">
+              <div class="goal-name">Engagement Rate</div>
+              <div class="goal-status">96% of goal</div>
+            </div>
+            <div class="goal-progress"><div class="goal-bar" style="width:96%"></div></div>
+            <div class="goal-numbers"><span>4.8% current</span><span>5% goal</span></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-header">
+              <div class="goal-name">Leads Generated</div>
+              <div class="goal-status">77% complete</div>
+            </div>
+            <div class="goal-progress"><div class="goal-bar" style="width:77%"></div></div>
+            <div class="goal-numbers"><span>23 leads</span><span>30 goal</span></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-header">
+              <div class="goal-name">Email Subscribers</div>
+              <div class="goal-status">62% complete</div>
+            </div>
+            <div class="goal-progress"><div class="goal-bar" style="width:62%"></div></div>
+            <div class="goal-numbers"><span>1,240 subs</span><span>2,000 goal</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Top Performing Content This Month</div>
+        <div class="section-action">View All →</div>
+      </div>
+      <table class="top-posts-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Content</th>
+            <th>Platform</th>
+            <th>Reach</th>
+            <th>Engagement</th>
+            <th>Leads</th>
+            <th>Pillar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="rank-badge">1</div></td>
+            <td>
+              <div class="post-title-cell">I lost my biggest client and gained 3 better ones</div>
+              <div class="post-excerpt">Story / Transformation framework</div>
+            </td>
+            <td><span class="platform-pill li">LinkedIn</span></td>
+            <td><strong>34,200</strong></td>
+            <td><strong>6.8%</strong></td>
+            <td><strong>7</strong></td>
+            <td><span class="tag">Story</span></td>
+          </tr>
+          <tr>
+            <td><div class="rank-badge rank-2">2</div></td>
+            <td>
+              <div class="post-title-cell">5 content mistakes killing your personal brand</div>
+              <div class="post-excerpt">Educational carousel — 8 slides</div>
+            </td>
+            <td><span class="platform-pill ig">Instagram</span></td>
+            <td><strong>28,100</strong></td>
+            <td><strong>5.4%</strong></td>
+            <td><strong>4</strong></td>
+            <td><span class="tag">Education</span></td>
+          </tr>
+          <tr>
+            <td><div class="rank-badge rank-3">3</div></td>
+            <td>
+              <div class="post-title-cell">Consistency is overrated (hot take thread)</div>
+              <div class="post-excerpt">Controversial thread — 9 tweets</div>
+            </td>
+            <td><span class="platform-pill tw">X</span></td>
+            <td><strong>19,400</strong></td>
+            <td><strong>4.9%</strong></td>
+            <td><strong>3</strong></td>
+            <td><span class="tag">Engagement</span></td>
+          </tr>
+          <tr>
+            <td style="color:#999; font-family:'DM Mono',monospace; font-size:11px;">4</td>
+            <td>
+              <div class="post-title-cell">How Sarah went from 800 to 12K followers in 90 days</div>
+              <div class="post-excerpt">Client results case study</div>
+            </td>
+            <td><span class="platform-pill li">LinkedIn</span></td>
+            <td><strong>14,700</strong></td>
+            <td><strong>3.8%</strong></td>
+            <td><strong>9</strong></td>
+            <td><span class="tag">Conversion</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">📈</div>
+      <div class="tip-content">
+        <div class="tip-label">The 4-Week Iteration Rule</div>
+        <div class="tip-text">Every 4 weeks, identify your top 3 performing posts. Analyse the hook type, content pillar, format, and CTA. Replicate those 3 elements in at least 2 new pieces of content in the next cycle. This compound iteration is how good content systems become great ones.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: PRICING ══════════════ -->
+<div id="page-pricing" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Product Guide</div>
+      <div class="page-title">Price, Package & Sell</div>
+      <div class="page-desc">How to deliver and price this Content OS as a premium digital product or service package.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Recommended Pricing Tiers</div></div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-tier">Starter</div>
+            <div class="pricing-name">Content OS Template</div>
+            <div class="pricing-price">$97</div>
+            <div class="pricing-freq">One-time · Self-serve</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-feature"><span class="check">✓</span> Full Notion/Google Drive template</div>
+            <div class="pricing-feature"><span class="check">✓</span> 90-Day Roadmap</div>
+            <div class="pricing-feature"><span class="check">✓</span> Hook Bank (50+ hooks)</div>
+            <div class="pricing-feature"><span class="check">✓</span> 5 Storytelling Frameworks</div>
+            <div class="pricing-feature"><span class="check">✓</span> 20+ Posting Templates</div>
+            <div class="pricing-feature"><span class="check">✓</span> Analytics Tracker</div>
+            <div class="pricing-feature"><span class="cross">✗</span> Onboarding call</div>
+            <div class="pricing-feature"><span class="cross">✗</span> Personalisation session</div>
+          </div>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-header">
+            <div class="pricing-tier">Most Popular</div>
+            <div class="pricing-name" style="color:var(--cream)">Content OS + Setup</div>
+            <div class="pricing-price">$297</div>
+            <div class="pricing-freq">One-time · Guided setup</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-feature"><span class="check">✓</span> Everything in Starter</div>
+            <div class="pricing-feature"><span class="check">✓</span> 90-minute 1:1 onboarding call</div>
+            <div class="pricing-feature"><span class="check">✓</span> Personalised pillar mapping session</div>
+            <div class="pricing-feature"><span class="check">✓</span> Custom ICM statement built together</div>
+            <div class="pricing-feature"><span class="check">✓</span> First 30-day calendar pre-filled</div>
+            <div class="pricing-feature"><span class="check">✓</span> 30-day email support</div>
+            <div class="pricing-feature"><span class="cross">✗</span> Monthly strategy reviews</div>
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-tier">Premium</div>
+            <div class="pricing-name">Content OS + Done-For-You</div>
+            <div class="pricing-price">$997</div>
+            <div class="pricing-freq">One-time · Full setup</div>
+          </div>
+          <div class="pricing-body">
+            <div class="pricing-feature"><span class="check">✓</span> Everything in Guided Setup</div>
+            <div class="pricing-feature"><span class="check">✓</span> Full system built & customised for you</div>
+            <div class="pricing-feature"><span class="check">✓</span> Brand voice guide written</div>
+            <div class="pricing-feature"><span class="check">✓</span> First month of content planned</div>
+            <div class="pricing-feature"><span class="check">✓</span> 3 months of check-in calls</div>
+            <div class="pricing-feature"><span class="check">✓</span> Platform profile optimisation</div>
+            <div class="pricing-feature"><span class="check">✓</span> Priority support channel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Delivery Options</div></div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-icon sage">📐</div>
+          <div class="card-title">Notion Template</div>
+          <div class="card-body"><strong>Best for:</strong> Buyers who already use Notion or want a beautiful, all-in-one workspace.<br><br><strong>How to deliver:</strong> Duplicate the template → share with buyer's email → they add to their Notion workspace. Create a demo video walkthrough.<br><br><strong>Tools needed:</strong> Notion, Loom (for walkthrough), Gumroad or Stan Store (for payment)</div>
+        </div>
+        <div class="card">
+          <div class="card-icon steel">📁</div>
+          <div class="card-title">Google Drive System</div>
+          <div class="card-body"><strong>Best for:</strong> Corporate buyers, teams, and people already in Google ecosystem.<br><br><strong>How to deliver:</strong> Share Google Drive folder with "make a copy" instructions. Include Google Sheets analytics tracker and Google Docs templates.<br><br><strong>Tools needed:</strong> Google Drive, Google Sheets, Google Docs, Loom, Gumroad</div>
+        </div>
+        <div class="card">
+          <div class="card-icon gold">🎓</div>
+          <div class="card-title">Course + Template Bundle</div>
+          <div class="card-body"><strong>Best for:</strong> Premium buyers who need guidance, not just a template.<br><br><strong>How to deliver:</strong> Loom or Kajabi/Teachable course walking through each module + the template as a download.<br><br><strong>Tools needed:</strong> Kajabi, Teachable, or Gumroad + Loom for video walkthroughs</div>
+        </div>
+        <div class="card">
+          <div class="card-icon rust">🤝</div>
+          <div class="card-title">Done-With-You Productised Service</div>
+          <div class="card-body"><strong>Best for:</strong> High-ticket buyers (founders, executives) who want implementation support.<br><br><strong>How to deliver:</strong> Onboarding call + async Loom walkthroughs + WhatsApp/Slack support + monthly check-ins.<br><br><strong>Tools needed:</strong> Calendly, Loom, Notion/GDrive + payment via Stripe or Wave</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Marketing This Product</div></div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rust);color:white">1</div>
+          <div class="step-content">
+            <div class="step-title">Post a before-and-after case study using the system on yourself</div>
+            <div class="step-desc">Use your own content growth data as the first case study. Document your own transformation using the Content OS you're selling. Authentic proof-of-product is the highest-converting sales content you can create.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rust);color:white">2</div>
+          <div class="step-content">
+            <div class="step-title">Create a "content confusion to content clarity" narrative</div>
+            <div class="step-desc">The main pain this product solves is chaos and inconsistency. Tell the story of a founder who was posting randomly, burning out, getting no results — and show how the OS changed that.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rust);color:white">3</div>
+          <div class="step-content">
+            <div class="step-title">Offer a free Hook Bank sample as a lead magnet</div>
+            <div class="step-desc">Give away 10 free hooks in exchange for an email address. Use this to build your list and nurture buyers toward the full Content OS. The free sample creates a taste of value that makes the purchase decision easy.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num" style="background:var(--rust);color:white">4</div>
+          <div class="step-content">
+            <div class="step-title">Position against the alternative: hiring a content manager</div>
+            <div class="step-desc">Most founders who need this product are either hiring someone or spending 10+ hours a week on content manually. Compare $97–$297 to the cost of outsourcing or the opportunity cost of their time. The framing sells itself.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ PAGE: CUSTOMISE ══════════════ -->
+<div id="page-customise" class="page">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">Product Guide</div>
+      <div class="page-title">Customise & Brand Your System</div>
+      <div class="page-desc">How to adapt this Content OS to match any founder's voice, brand, and business model.</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Visual Design System (Notion)</div></div>
+      <div class="card-grid card-grid-3">
+        <div class="card">
+          <div class="card-icon gold">🎨</div>
+          <div class="card-title">Colour Scheme</div>
+          <div class="card-body">Use a maximum of 3 brand colours consistently across covers, icons, and dividers. In Notion, use callout blocks with custom emojis as visual anchors. Recommended palette for a professional founder brand: Deep navy + warm gold + off-white.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon sage">✏️</div>
+          <div class="card-title">Typography</div>
+          <div class="card-body">Notion's default font works fine. Add visual hierarchy through headings (H1 for page titles, H2 for sections, H3 for sub-points). Use bold sparingly — save it for the most important lines. Never use underline (looks like a link).</div>
+        </div>
+        <div class="card">
+          <div class="card-icon steel">🗂️</div>
+          <div class="card-title">Page Structure</div>
+          <div class="card-body">Every page should open with: Emoji icon + page title + 1-line description + quick navigation. Use dividers generously to create breathing room. Group related content in Toggle blocks to reduce visual clutter.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Adapting for Different Founder Voices</div></div>
+      <table class="week-table">
+        <thead>
+          <tr><th>Founder Type</th><th>Adjust Content Pillars To...</th><th>Hook Style</th><th>Primary Platform</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>B2B Tech Founder</strong></td>
+            <td>Product, Team culture, Market insights, Customer stories, Founder journey</td>
+            <td>Data-led, authority hooks, result-driven</td>
+            <td>LinkedIn + X</td>
+          </tr>
+          <tr>
+            <td><strong>Coach / Consultant</strong></td>
+            <td>Methodology, Client results, Personal story, Industry take, Education</td>
+            <td>Story hooks, pain point hooks, transformation</td>
+            <td>LinkedIn + Instagram</td>
+          </tr>
+          <tr>
+            <td><strong>Creative Entrepreneur</strong></td>
+            <td>Process, Inspiration, Behind-scenes, Values, Client work</td>
+            <td>BTS narrative, relatable hooks, curiosity</td>
+            <td>Instagram + TikTok</td>
+          </tr>
+          <tr>
+            <td><strong>Executive / Thought Leader</strong></td>
+            <td>Leadership, Industry commentary, Culture, Strategy, Vision</td>
+            <td>Authority hooks, controversial takes, question hooks</td>
+            <td>LinkedIn + Newsletter</td>
+          </tr>
+          <tr>
+            <td><strong>Product/SaaS Founder</strong></td>
+            <td>Building in public, Product decisions, User stories, Market view, Team</td>
+            <td>BTS narrative, data hooks, story hooks</td>
+            <td>X + LinkedIn + YouTube</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Brand Voice Customisation Guide</div></div>
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-icon gold">🗣️</div>
+          <div class="card-title">Voice Spectrum Settings</div>
+          <div class="card-body">
+            <strong>Formality dial:</strong> <span class="tag">Corporate</span> ↔ <span class="tag">Conversational</span> ↔ <span class="tag">Casual</span><br><br>
+            <strong>Authority dial:</strong> <span class="tag">Peer</span> ↔ <span class="tag">Expert</span> ↔ <span class="tag">Authority</span><br><br>
+            <strong>Tone dial:</strong> <span class="tag">Analytical</span> ↔ <span class="tag">Storytelling</span> ↔ <span class="tag">Provocative</span><br><br>
+            Set these three dials before customising the templates. Each combination creates a distinct content voice.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon rust">❌</div>
+          <div class="card-title">Brand Voice Rules</div>
+          <div class="card-body">
+            <strong>Words we use:</strong> Add 5–10 words/phrases that feel like you<br>e.g. "tangible", "no-nonsense", "earned clarity"<br><br>
+            <strong>Words we avoid:</strong> Add 5–10 words that feel generic or inauthentic<br>e.g. "synergy", "game-changer", "crushing it"<br><br>
+            <strong>Topics we don't post about:</strong> List any off-limits subjects for your brand context.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-title">Notion Setup Checklist</div></div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Duplicate the template to your Notion workspace</div>
+            <div class="step-desc">Go to the template link → click "Duplicate" → select your workspace. Rename the top-level page to "Content OS — [Your Name/Brand]".</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Complete the Brand Foundation page first</div>
+            <div class="step-desc">Before touching any other module, fill in: your ICM statement, your 5 content pillars, your brand voice words, and your current platform priorities. Everything else in the system flows from this page.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Set up the Analytics database</div>
+            <div class="step-desc">Add your current follower counts and engagement rates as a Week 0 baseline. You can't track growth without a starting point. Log this data the same day you set up the system.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Populate the first 2 weeks of the Content Calendar</div>
+            <div class="step-desc">Don't wait until you "know what to write." Assign post types and pillars to dates first. The topic comes after the structure. Use the templates to fill content into the calendar slots you've pre-set.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Share (read-only) with anyone who creates content for you</div>
+            <div class="step-desc">If you work with a VA, content manager, or ghostwriter, share the Brand Foundation and Templates pages in read-only mode. This is your content brief — it removes the need for constant back-and-forth briefing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ── Page Navigation ──
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  document.querySelector(`[onclick="showPage('${pageId}')"]`).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Hook Filter ──
+function filterHooks(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.hook-card').forEach(card => {
+    if (type === 'all' || card.dataset.type === type) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ── Framework Tabs ──
+function showFramework(id, tab) {
+  document.querySelectorAll('.framework-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.framework-content').forEach(c => c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('framework-' + id).classList.add('active');
+}
+
+// ── Platform Tabs ──
+function showPlatform(id, btn) {
+  document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('platform-' + id).classList.add('active');
+}
+
+// ── Copy Hook ──
+function copyHook(btn) {
+  const hookText = btn.closest('.hook-card').querySelector('.hook-text').textContent;
+  navigator.clipboard.writeText(hookText).then(() => {
+    btn.textContent = '✅';
+    setTimeout(() => btn.textContent = '📋', 1500);
+  });
+}
+</script>
+
+</body>
+</html>
